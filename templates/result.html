@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Result</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width:850px; margin:35px auto; padding:0 18px; background:#f4f7fb; color:#172033; }
+    .panel, .review { background:white; border-radius:12px; padding:22px; margin:14px 0; box-shadow:0 2px 9px #00000012; }
+    .score { font-size:30px; color:#175cd3; font-weight:bold; } .correct { color:#067647; } .wrong { color:#b42318; }
+    a, button { display:inline-block; background:#175cd3; color:white; padding:11px 16px; border-radius:8px; text-decoration:none; border:0; }
+  </style>
+</head>
+<body>
+  <section class="panel">
+    <h1>Online Exam — Final Result</h1>
+    <p class="score">{{ score }} / {{ total }} ({{ percentage }}%)</p>
+    <p>{{ message }}</p>
+    <a href="{{ url_for('home') }}">Take exam again</a>
+  </section>
+  <section class="review">
+    <h2>Answer review</h2>
+    {% for item in review %}
+      <p><strong>{{ loop.index }}. {{ item.question }}</strong><br>
+      Your answer: {{ item.selected_text }}<br>
+      Correct answer: {{ item.correct_text }}<br>
+      <span class="{{ 'correct' if item.is_correct else 'wrong' }}">{{ 'Correct' if item.is_correct else 'Incorrect' }}</span>
+      <br><small>{{ item.explanation }}</small></p>
+    {% endfor %}
+  </section>
+</body>
+</html>
